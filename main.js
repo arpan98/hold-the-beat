@@ -114,7 +114,6 @@ function CreateGraph(diffs) {
             row = row + 'ext neg"><div style="width:' + Math.ceil((Math.abs(diffs[i]) * 100) / timeInterval) + '%;" class="bar"></div></div>'
         else
             row = row + 'ext pos"><div style="width:' + Math.ceil((Math.abs(diffs[i]) * 100) / timeInterval) + '%;" class="bar"></div></div>'
-        console.log(row);
         $("#results-graph").append(row);
     }
 }
@@ -123,39 +122,43 @@ function GameOver() {
     var diffs = []
     console.log("Game over!");
     SyncClickStart();
-    if(realclicks.length >= beats.length) {
-        for(var i=0 ; i<beats.length ; i++) {
-            var diff = realclicks[i] - beats[i];
-            diffs.push(diff);
+    if(realclicks.length > 0) {
+        if(realclicks.length >= beats.length) {
+            for(var i=0 ; i<beats.length ; i++) {
+                var diff = beats[i] - realclicks[i];
+                diffs.push(diff);
+            }
         }
+        else {
+            for(var i=0 ; i<realclicks.length ; i++) {
+                var diff = beats[i] - realclicks[i];
+                diffs.push(diff);
+            }
+            for(i=realclicks.length ; i<beats.length ; i++) {
+                diff = 10000;
+                diffs.push(diff);
+            }
+        }
+        console.log(diffs);
+        var avg = standardDeviation(diffs);
+        console.log("Average = " + avg);
+        var newdiffs = [];
+        var newabsdiffs = [];
+        for(var i=0 ; i<diffs.length ; i++) {
+            newdiffs.push(diffs[i] - avg);
+            newabsdiffs.push(Math.abs(diffs[i] - avg));
+        }
+        console.log(newdiffs);
+        var deviation = standardDeviation(newabsdiffs);
+        var score = Math.floor(10000/deviation);
+        console.log(deviation);
+            CreateGraph(newdiffs);
     }
-    else {
-        for(var i=0 ; i<realclicks.length ; i++) {
-            var diff = realclicks[i] - beats[i];
-            diffs.push(diff);
-        }
-        for(i=realclicks.length ; i<beats.length ; i++) {
-            diff = "NA";
-            diffs.push(diff);
-        }
-    }
-    console.log(diffs);
+    else
+        var score = 0;
     $(".remove-when-score").remove();
     $(".score").show();
-    var avg = standardDeviation(diffs);
-    console.log("Average = " + avg);
-    var newdiffs = [];
-    var newabsdiffs = [];
-    for(var i=0 ; i<diffs.length ; i++) {
-        newdiffs.push(diffs[i] - avg);
-        newabsdiffs.push(Math.abs(diffs[i] - avg));
-    }
-    console.log(newdiffs);
-    var deviation = standardDeviation(newabsdiffs);
-    var score = Math.floor(10000/deviation);
-    console.log(deviation);
     $(".score-value").text(score);
-    CreateGraph(newdiffs);
 }
 
 StartAudio();
