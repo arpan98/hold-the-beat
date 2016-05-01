@@ -138,7 +138,7 @@ function GameOver() {
                 diffs.push(diff);
             }
             for(i=realclicks.length ; i<beats.length ; i++) {
-                diff = 10000;
+                diff = timeInterval;
                 diffs.push(diff);
             }
         }
