@@ -21,7 +21,10 @@ function standardDeviation(values){
     var avgSquareDiff = average(squareDiffs);
 
     var stdDev = Math.sqrt(avgSquareDiff);
-    return stdDev;
+    if(avg<0)
+        return -1 * stdDev;
+    else
+        return stdDev;
 }
 
 function average(data){
