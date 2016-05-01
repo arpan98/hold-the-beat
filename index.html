@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hold the Beat!</title>
+</head>
+<script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="jquery.clickBubble.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript">
+	
+		$('html').clickBubble({
+			color: '#fff',
+			size: 400,
+			time: 1000,
+			borderWidth: 5
+		});
+	
+</script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<body>
+	<div class="remove-when-score">
+		<h1><center><label class="unselectable">Tap with the beat!</label></center></h1>
+		<br> <br>
+		<h2 id="game_start_note"><center><label class="unselectable">Now the beat will slowly fade... Keep tapping! <br><br> Try to hold the beat in your head <br><br> Scoring starts when the beat <i>stops</i>.</label></center></h2>
+		<br> <br>
+		<h2 id="game_midway_note"><center><label class="unselectable">Almost finished... Keep Going!</label></center></h2>
+	</div>
+	<div class="score">
+		<h1><center><label class="unselectable">Score</label></center></h1>
+		<h2><center><span class="score-value">205</span></center></h2>
+		<h1><center><label class="unselectable">Timings</label></center></h1>
+		<div class="graph cf">
+		<ul id="results-graph" style="list-style-type:none">
+		</ul>
+		</div>
+		<h3 id="early" class="unselectable">Early</h3>
+		<h3 id="late" class="unselectable">Late</h3>
+	</div>
+</body>
+</html>
