@@ -229,7 +229,7 @@ function GameOver() {
 
     makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'POST', JSON.stringify(data));
 
-    makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'POST', null);
+    makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'GET', null);
 
     $(".remove-when-score").remove();
     $(".score").show();
