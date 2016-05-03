@@ -8,6 +8,7 @@ var beats = [];
 var clicks = [];
 var realclicks = [];
 var totalGameTime = 5000;
+var userName = "Anonymous";
 
 function standardDeviation(values){
     var avg = average(values);
@@ -159,12 +160,28 @@ function GameOver() {
     }
     else
         var score = 0;
+    data = {"username": userName, "score": score};
+
+    $.post(
+        "http://www.kibo.in/holdthebeat/highscore",
+        data,
+        function(result) {
+            console.log(result);
+        });
+
     $(".remove-when-score").remove();
     $(".score").show();
     $(".score-value").text(score);
 }
 
-StartAudio();
+
+$(document).ready(function() {
+    userName = prompt("Please enter your name", "Anonymous");
+    if(userName == null) {
+        userName = "Anonymous";
+    }
+    StartAudio();
+})
 
 document.onclick = function(event) {
     var d = new Date();
