@@ -168,11 +168,11 @@ function makeCorsRequest(url, method, params) {
   xhr.onload = function() {
     var text = xhr.responseText;
     var title = getTitle(text);
-    alert('Response from CORS request to ' + url + ': ' + title);
+    console.log('Response from CORS request to ' + url + ': ' + title);
   };
 
   xhr.onerror = function() {
-    alert('Woops, there was an error making the request.');
+    console.log('Woops, there was an error making the request.');
   };
 
   if(params != null) {
@@ -184,7 +184,25 @@ function makeCorsRequest(url, method, params) {
 }
 
 function getLeaderboard(jsonString) {
-    console.log(jsonString);
+    jsonString = '[{"model": "website.holdthebeat", "pk": 116, "fields": {"username": "arpan", "score": 750}}, {"model": "website.holdthebeat", "pk": 117, "fields": {"username": "arpan", "score": 500}}, {"model": "website.holdthebeat", "pk": 118, "fields": {"username": "Anonymous", "score": 376}}, {"model": "website.holdthebeat", "pk": 119, "fields": {"username": "arpan", "score": 341}}, {"model": "website.holdthebeat", "pk": 120, "fields": {"username": "Anonymous", "score": 309}}, {"model": "website.holdthebeat", "pk": 121, "fields": {"username": "arpan", "score": 300}}, {"model": "website.holdthebeat", "pk": 122, "fields": {"username": "Anonymous", "score": 257}}, {"model": "website.holdthebeat", "pk": 123, "fields": {"username": "arpan", "score": 190}}, {"model": "website.holdthebeat", "pk": 124, "fields": {"username": "Anonymous", "score": 185}}, {"model": "website.holdthebeat", "pk": 125, "fields": {"username": "arpan", "score": 165}}]'
+    var leaderboard_list = JSON.parse(jsonString);
+    var table = document.getElementById("leaderboard");
+    for (var i=0 ; i<leaderboard_list.length ; i++) {
+        row=document.createElement("tr");
+        cell1 = document.createElement("td");
+        cell2 = document.createElement("td");
+        cell3 = document.createElement("td");
+        textnode1 = document.createTextNode(i + 1);
+        textnode2 = document.createTextNode(leaderboard_list[i].fields.username);
+        textnode3 = document.createTextNode(leaderboard_list[i].fields.score);
+        cell1.appendChild(textnode1);
+        cell2.appendChild(textnode2);
+        cell3.appendChild(textnode3);
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+        table.appendChild(row);
+    }
 }
 
 function GameOver() {
