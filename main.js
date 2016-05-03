@@ -9,6 +9,7 @@ var clicks = [];
 var realclicks = [];
 var totalGameTime = 5000;
 var userName = "Anonymous";
+var leaderboard = [];
 
 function standardDeviation(values){
     var avg = average(values);
@@ -155,6 +156,14 @@ function makeCorsRequest(url, method, params) {
     return;
   }
 
+  xhr.onreadystatechange = function() {
+    if(method == 'GET') {
+        if(xhr.readyState == XMLHttpRequest.DONE) {
+            getLeaderboard(xhr.responseText)
+        }
+    }
+  }
+
   // Response handlers.
   xhr.onload = function() {
     var text = xhr.responseText;
@@ -166,7 +175,16 @@ function makeCorsRequest(url, method, params) {
     alert('Woops, there was an error making the request.');
   };
 
-  xhr.send(params);
+  if(params != null) {
+      xhr.send(params);
+    }
+  else {
+    xhr.send();
+  }
+}
+
+function getLeaderboard(jsonString) {
+    console.log(jsonString);
 }
 
 function GameOver() {
@@ -208,14 +226,6 @@ function GameOver() {
     else
         var score = 0;
     data = {"username": userName, "score": score}
-    /*
-    $.post(
-        "http://www.kibo.in/holdthebeat/highscore",
-        data,
-        function(result) {
-            console.log(result);
-        });
-    */
 
     makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'POST', JSON.stringify(data));
 
@@ -226,7 +236,7 @@ function GameOver() {
 
 
 $(document).ready(function() {
-    userName = prompt("Please enter your name", "Anonymous");
+    userName = prompt("Please enter your name for leaderboard", "Anonymous");
     if(userName == null) {
         userName = "Anonymous";
     }

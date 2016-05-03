@@ -25,6 +25,11 @@ body {
 .score {
 	display: none;
 }
+
+th, td {
+	padding: 15px;
+}
+
 #early {
 	text-align: left;
 	margin-left: 10%;
