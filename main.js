@@ -184,7 +184,6 @@ function makeCorsRequest(url, method, params) {
 }
 
 function getLeaderboard(jsonString) {
-    jsonString = '[{"model": "website.holdthebeat", "pk": 116, "fields": {"username": "arpan", "score": 750}}, {"model": "website.holdthebeat", "pk": 117, "fields": {"username": "arpan", "score": 500}}, {"model": "website.holdthebeat", "pk": 118, "fields": {"username": "Anonymous", "score": 376}}, {"model": "website.holdthebeat", "pk": 119, "fields": {"username": "arpan", "score": 341}}, {"model": "website.holdthebeat", "pk": 120, "fields": {"username": "Anonymous", "score": 309}}, {"model": "website.holdthebeat", "pk": 121, "fields": {"username": "arpan", "score": 300}}, {"model": "website.holdthebeat", "pk": 122, "fields": {"username": "Anonymous", "score": 257}}, {"model": "website.holdthebeat", "pk": 123, "fields": {"username": "arpan", "score": 190}}, {"model": "website.holdthebeat", "pk": 124, "fields": {"username": "Anonymous", "score": 185}}, {"model": "website.holdthebeat", "pk": 125, "fields": {"username": "arpan", "score": 165}}]'
     var leaderboard_list = JSON.parse(jsonString);
     var table = document.getElementById("leaderboard");
     for (var i=0 ; i<leaderboard_list.length ; i++) {
