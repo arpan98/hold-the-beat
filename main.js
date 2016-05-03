@@ -122,6 +122,52 @@ function CreateGraph(diffs) {
     }
 }
 
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Helper method to parse the title tag from the response.
+function getTitle(text) {
+  return text.match('<title>(.*)?</title>')[1];
+}
+
+// Make the actual CORS request.
+function makeCorsRequest(url, method, params) {
+  // All HTML5 Rocks properties support CORS.
+
+  var xhr = createCORSRequest(method, url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    var title = getTitle(text);
+    alert('Response from CORS request to ' + url + ': ' + title);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send(params);
+}
+
 function GameOver() {
     var diffs = []
     console.log("Game over!");
@@ -160,14 +206,17 @@ function GameOver() {
     }
     else
         var score = 0;
-    data = {"username": userName, "score": score};
-
+    data = "username=" + userName + "&score=" + score;
+    /*
     $.post(
         "http://www.kibo.in/holdthebeat/highscore",
         data,
         function(result) {
             console.log(result);
         });
+    */
+
+    makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'POST', data);
 
     $(".remove-when-score").remove();
     $(".score").show();
