@@ -136,6 +136,7 @@ function createCORSRequest(method, url) {
     // CORS not supported.
     xhr = null;
   }
+  xhr.setRequestHeader('Content-Type', 'application/json')
   return xhr;
 }
 
@@ -206,7 +207,7 @@ function GameOver() {
     }
     else
         var score = 0;
-    data = "username=" + userName + "&score=" + score;
+    data = {"username": userName, "score": score}
     /*
     $.post(
         "http://www.kibo.in/holdthebeat/highscore",
@@ -216,7 +217,7 @@ function GameOver() {
         });
     */
 
-    makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'POST', data);
+    makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'POST', JSON.stringify(data));
 
     $(".remove-when-score").remove();
     $(".score").show();
