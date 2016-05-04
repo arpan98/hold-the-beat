@@ -248,18 +248,33 @@ function GameOver() {
 
     makeCorsRequest("http://www.kibo.in/holdthebeat/highscore", 'GET', null);
 
-    $(".remove-when-score").remove();
+    $(".remove-when-score").hide();
+    $("html").unbind();
+
+    $(".replay.btn").click(function() {
+        location.reload();
+    })
+    
     $(".score").show();
     $(".score-value").text(score);
 }
 
-
 $(document).ready(function() {
-    userName = prompt("Please enter your name for leaderboard", "Anonymous");
-    if(userName == null) {
-        userName = "Anonymous";
+    if(sessionStorage.getItem("username") == null) {
+        userName = prompt("Please enter your name for leaderboard", "Anonymous");
+        if(userName == null) {
+            userName = "Anonymous";
+        }
+        sessionStorage.setItem("username", userName);
     }
     StartAudio();
+
+    $("html").clickBubble({
+        color: '#fff',
+        size: 400,
+        time: 1000,
+        borderWidth: 5
+    });
 })
 
 document.onclick = function(event) {

@@ -6,17 +6,13 @@
 <script type="text/javascript" src="jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="jquery.clickBubble.min.js"></script>
 <script type="text/javascript" src="main.js"></script>
-<script type="text/javascript">
-	
-		$('html').clickBubble({
-			color: '#fff',
-			size: 400,
-			time: 1000,
-			borderWidth: 5
-		});
-	
-</script>
+
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript">
+	function replay() {
+		location.reload();
+	}
+</script>
 
 <body>
 	<div class="remove-when-score">
@@ -37,6 +33,8 @@
 		<h3 id="early" class="unselectable">Early</h3>
 		<h3 id="late" class="unselectable">Late</h3>
 		<br><br>
+		<center><button class="replay btn">Play Again!</button></center>
+		<br>
 		<h1><center><label class="unselectable">Leaderboard</label></center></h1>
 		<center>
 		<table id="leaderboard">
@@ -44,6 +42,7 @@
 			<th>Name</th>
 			<th>Score</th>
 		</table>
+		<br>
 		</center>
 	</div>
 </body>

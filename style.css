@@ -45,6 +45,34 @@ th, td {
 	font-weight: 100;
 }
 
+.btn {
+  background: #eb0000;
+  background-image: -webkit-linear-gradient(top, #eb0000, #ad2323);
+  background-image: -moz-linear-gradient(top, #eb0000, #ad2323);
+  background-image: -ms-linear-gradient(top, #eb0000, #ad2323);
+  background-image: -o-linear-gradient(top, #eb0000, #ad2323);
+  background-image: linear-gradient(to bottom, #eb0000, #ad2323);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #fc6f3c;
+  background-image: -webkit-linear-gradient(top, #fc6f3c, #d96034);
+  background-image: -moz-linear-gradient(top, #fc6f3c, #d96034);
+  background-image: -ms-linear-gradient(top, #fc6f3c, #d96034);
+  background-image: -o-linear-gradient(top, #fc6f3c, #d96034);
+  background-image: linear-gradient(to bottom, #fc6f3c, #d96034);
+  text-decoration: none;
+}
+
 /*
 CSS for Graph
 */
